@@ -1,0 +1,51 @@
+Abgabe 06.12.21:
+Leitfragen(Informationsphase)
+Planungsergebnisse (UML-Klassendiagramm, UML-Objektdiagramm, Zeitplanung (Planungs-/ Entscheidungsphase)
+Kommentieren & Dokumentieren JAVA-Code (Durchführung)
+Testfälle(Checkliste & Programmcode)
+
+Pair-Programming
+
+Daten zu dem Fahrzeug:
+                Herstellername, Kilometerstand, Verbrauch(100km),
+                max. Tankinhalt, Tankinhalt, Basismietpreis,
+                Mietpreis(Tag), Leihstatus(ja/nein), Leihdauer(in Tagen),
+                Fahrzeugklasse(Kleinwagen, Mittelklasse, Luxus)
+
+
+Fahrzeug Fähigkeiten:
+                Tanken:     Benzin(Liter), darf nicht übertanken
+                Fahren:     Anzahl(km), Kilometerstand erhöhen, Tankinhalt erniedrigt, ausreichend Benzin(Bool)
+                Daten:      Alle Infos ausgeben
+                Tankstatus: Info: halbvoll(Bool)
+                Mietpreis:  Berechnen, Basismietpreis + Leihdauer, Mittelklasse(+10%), Luxus(+30%), Berechnen nur wenn vermietet
+                Buchung:    Status -> vermietet + Mietdauer(Tage), bereits vermietet -> Anfrage ignoriert
+
+
+Erweiterungsaufgaben:
+                Kennzeichen(XX-YY-12345)
+                Fahrgestellnummer(8 Ziffern) => andere ungültig
+                Alle Daten als String zurückgeben
+                Mietpreis(max. 2 Nachkommastellen)
+                Fahrzeuge im Array(Filtersuche) =>Eigene Ideen
+                GUI Fahrzeugverwaltung
+                => Eigene Ideen
+
+
+Eigene Ideen:
+Fahrzeuge Database: GUI + Bilder || Array
+Fahrzeuge verwalten:
+                addVehicle();
+                removeVehicle();
+                getVehicle();
+                getAllVehicles();
+                getAllVehiclesInfo();
+                
+                
+                (Filtersuche: Herstellername, Kilometerstand, Verbrauch, Basismietpreis,
+                Fahrzeugklasse, Mietpreis(Tag))
+
+
+
+
+
