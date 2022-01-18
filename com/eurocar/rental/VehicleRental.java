@@ -21,9 +21,9 @@ public class VehicleRental {
 
         InitalizeAllVehicles(); //Add all Vehicle-Objects to ArrayList
 
-
+        //Entry Point
         while(loop){
-            System.out.print("[1]Alle-Fahrzeuge [2]Finden [3]Hinzufuegen [4]Beenden |->|: ");
+            System.out.print("[1]Alle-Fahrzeuge [2]Finden [3]Hinzufuegen [4]Beenden |->|: ");     
             char c = reader.next().charAt(0); //Change to String cz Uppercase
             System.out.println();
             switch (c) {
@@ -45,11 +45,9 @@ public class VehicleRental {
                     break;
             }
         }
-
-        
-      //System.out.print("\033[H\033[2J"); 
     }
 
+    //Suchen vom Auto in der Datei
     public static void FindVehicle() throws IOException{
 
         Scanner scanner = new Scanner(System.in); //Cannot close Scanner cz of switch Scanner
@@ -112,8 +110,8 @@ public class VehicleRental {
         }
 
     }
-    
-    public static void OverrideVehicleData(short index)  { //Should read from file. (Arraylist copy vehicle delete old and create new) (Try to rewrite only 1 value)
+    //Einzele Objekte des Fahrzeugs umschreiben
+    public static void OverrideVehicleData(short index)  { 
         Scanner scanner = new Scanner(System.in);
 
         Map<Character,Runnable> commands = new HashMap<>();
@@ -168,7 +166,7 @@ public class VehicleRental {
         }
     */
     }
-
+    //Benutzung vom Fahrzeug 
     public static void UsageOfVehicle(int vehIndex){
         //Tanken 
         Map<Character,Runnable> commands = new HashMap<>();
@@ -186,7 +184,7 @@ public class VehicleRental {
         commands.get(cmd).run();
 
     }
-
+    //Fahrzeug erstellen -> Datei
     public static void CreateVehicle(){
         Scanner scanner = new Scanner(System.in);
 
@@ -234,7 +232,7 @@ public class VehicleRental {
         InitalizeAllVehicles();
       
     }
-
+    //Alle Fahrzeuge in die ArrayList hinzufügen
     public static void InitalizeAllVehicles() {
         try {
 
@@ -264,7 +262,7 @@ public class VehicleRental {
             e.printStackTrace();
         } 
     }
-
+    //Alle Fahrzeuge auflisten
     public static void ListAllVehicles(){
         for (Vehicle product : productsList)
             System.out.println(product);

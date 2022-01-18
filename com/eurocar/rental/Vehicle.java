@@ -24,23 +24,20 @@ class Vehicle {
     //Tankstatus
     private Scanner scanner = new Scanner(System.in);
 
+    //Konstruktor
     public Vehicle(String Name, int Mileage, boolean RentalStatus,  float TankSize, String LicensePlate, String Manufacturer, float Consumption, float MaxTank, int BasePrice, String CarType  ) {
         this.name=Name;
         this.mileage=Mileage;
         this.rentalStatus=RentalStatus;
-
         this.tankSize = TankSize;
         this.licensePlate = LicensePlate;
         this.manufacturer = Manufacturer;
         this.consumption = Consumption;
         this.maxTank = MaxTank;
         this.basePrice = BasePrice;
-
-
         this.carType = CarType;
-       
     }
-    
+    //Schreib die Daten in die Datei
     public void WriteToFile(){
         try {
 
@@ -196,7 +193,7 @@ class Vehicle {
 
      
 
-//Werden nicht 
+//Werden nicht ausserhalb der klasse benutzt
     public void setRentalPrice(int newRentalPrice) {
         
        this.rentalPrice= newRentalPrice;
@@ -271,7 +268,7 @@ class Vehicle {
     }
 
      
-
+//Überschreibt die to string methode
     @Override
     public String toString() {
         return String.format("Name: %s\r\nMileage: %d km\r\nRentalStatus: %s\r\nTanksstatus: %s\r\nTankSize: %f Liter\r\nLicensePlate: %s\r\nManufacturer: %s\r\nConsumption: %f l/100km\r\nMaxTank: %f Liter \r\nBasePrice: %d Euro/Tag\r\nRentalPrice: %d Euro\r\nRentalPeriod: %d Tage\r\nCarType: %s\r\n", 
