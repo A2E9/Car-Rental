@@ -1,11 +1,8 @@
 package com.eurocar.rental;
 
-
-
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
-
 
 class Vehicle { 
     private String name;
@@ -40,8 +37,7 @@ class Vehicle {
     //Schreib die Daten in die Datei
     public void WriteToFile(){
         try {
-
-            FileWriter fileWriter = new FileWriter("src\\com\\eurocar\\rental\\Vehicle_Database.bin", true);
+            FileWriter fileWriter = new FileWriter("com\\eurocar\\rental\\Vehicle_Database.bin", true);
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
             printWriter.print(this.name + " ");
@@ -55,7 +51,6 @@ class Vehicle {
             printWriter.print(this.maxTank + " ");
             printWriter.print(this.basePrice + " ");
 
-
             printWriter.print(this.carType + " ");
             printWriter.close();
 
@@ -64,13 +59,9 @@ class Vehicle {
         }
     }
 
-
-
 //Tankt das Fahrzeug, soviel es geht
     public void Refuel(){
-        
-
-        System.out.print("Wie viel Liter möchtest du tanken: ");
+        System.out.print("How many liters you want to fill up: ");
         int toFuel = scanner.nextInt();
 
         float temp= tankSize += toFuel;
@@ -78,10 +69,10 @@ class Vehicle {
 
         if(temp > maxTank){
             leftLiter = temp - maxTank;
-            System.out.println("Das Auto darf nicht überfuellt werden. "+ leftLiter+" Liter uebrig");
+            System.out.println("The car must not be overfilled. "+ leftLiter+" Liters left over");
             tankSize = maxTank;
         } else{
-            System.out.println("Auto wurde getankt.");
+            System.out.println("Car was refueled.");
             tankSize = temp;
         }
 
@@ -90,33 +81,34 @@ class Vehicle {
     public void Drive(){
         float tempLiter;
         float newKm;
-        System.out.print("Wie viele Kilomter möchtest du fahren: ");
+        System.out.print("How many kilometers do you want to ride: ");
         int kilometerToDrive = scanner.nextInt();
 
         if(tankSize > 0){
             tempLiter = kilometerToDrive / consumption;
 
             if(tempLiter < maxTank){
-            tankSize -= tempLiter;
-            mileage += kilometerToDrive;
+                tankSize -= tempLiter;
+                mileage += kilometerToDrive;
             }else{
-                    newKm = tankSize*(100/consumption);
+                newKm = tankSize*(100/consumption);
                 mileage += newKm;
                 tankSize = 0;
-                System.out.println("Ihr Tank ist leer. Sie sind nur "+newKm+" km gefahren");
+                System.out.println("Your tank is empty. You have only driven "+newKm+" km");
             }
         }
     }
 //Buchung vom Auto
     public void RentVehicle(){
         if(getRentalStatus()){
-        System.out.print("Rental Period: ");
-        rentalPeriod = scanner.nextInt();
-        System.out.println("Rental Price: "+RentalPrice()+" Euro");
+            System.out.print("Rental Period: ");
+            rentalPeriod = scanner.nextInt();
+            System.out.println("Rental Price: "+RentalPrice()+" Euro");
 
-        setRentalStatus(false);
-        }else{
-            System.out.println("Auto nicht verfuegbar.");
+            setRentalStatus(false);
+        }else
+        {
+            System.out.println("Car not available.");
         }
     }
 //Berechnen vom RentalPrice
@@ -127,34 +119,28 @@ class Vehicle {
         double percent = 0;
         tempPrice = rentalPeriod*basePrice;
 
-
-       if(carType.equalsIgnoreCase("luxus")){
-        percent = 30;
-       temp2 = (int)(tempPrice +((percent/100)*tempPrice));
+       if(carType.equalsIgnoreCase("luxury")){
+            percent = 30;
+            temp2 = (int)(tempPrice +((percent/100)*tempPrice));
        }
-        else if (carType.equalsIgnoreCase("mittelklasse")){
-        percent = 20;
-        temp2 = (int)(tempPrice +((percent/100)*tempPrice));
+        else if (carType.equalsIgnoreCase("middleClass")){
+            percent = 20;
+            temp2 = (int)(tempPrice +((percent/100)*tempPrice));
         }
-        else if (carType.equalsIgnoreCase("kleinwagen")){
-        percent = 10;
-        temp2 = (int)(tempPrice +((percent/100)*tempPrice));
+        else if (carType.equalsIgnoreCase("smallCar")){
+            percent = 10;
+            temp2 = (int)(tempPrice +((percent/100)*tempPrice));
         }
         return rentalPrice= temp2;
     }
 
-   
-
 //Werden ausgeführt um daten des fahrzeugs zu ändern
     public void setName () {
-
         System.out.print("Name: ");
         String newName = scanner.next();
-
         this.name=newName;
     }
     public void setMileage () {
-
         System.out.print("Mileage: ");
         int newMileage = scanner.nextInt();
         this.mileage=newMileage;
@@ -178,7 +164,6 @@ class Vehicle {
         System.out.print("Consumtion: ");
         float newConsumption = Float.valueOf(scanner.next().substring(0));
         this.consumption=newConsumption;
-        
     }
     public void setMaxTank ( ) {
         System.out.print("MaxTank: ");
@@ -188,90 +173,36 @@ class Vehicle {
     public void setBasePrice (){
         System.out.print("BasePrice: ");
         int newBasePrice = scanner.nextInt();
-       this.basePrice= newBasePrice;
+        this.basePrice= newBasePrice;
     }
-
-     
 
 //Werden nicht ausserhalb der klasse benutzt
-    public void setRentalPrice(int newRentalPrice) {
-        
-       this.rentalPrice= newRentalPrice;
-       
-    } 
-    public void setRentalStatus(boolean newRentalStatus) {
-       
-
-     this.rentalStatus= newRentalStatus;
-     }
-    public void setRTankStatus(boolean newTankStatus) {
-        this.tankStatus= newTankStatus;
-        }
-    public void setRentalPeriod (int newRentalPeriod) {
-         this.rentalPeriod= newRentalPeriod;
-     }
+    public void     setRentalPrice(int newRentalPrice) {this.rentalPrice= newRentalPrice;} 
+    public void     setRentalStatus(boolean newRentalStatus) {this.rentalStatus= newRentalStatus;}
+    public void     setRTankStatus(boolean newTankStatus) {this.tankStatus= newTankStatus;}
+    public void     setRentalPeriod (int newRentalPeriod) {this.rentalPeriod= newRentalPeriod;}
      
+    public String   getName () {return name;}
+    public float    getTankSize () {return tankSize;}
+    public String   getLicensePlate () {return licensePlate;}
+    public String   getmanufacturer () {return manufacturer;}
+    public int      getMileage () {return mileage;}
+    public float    getConsumption () {return consumption;}
+    public float    getMaxTank () {return maxTank;}
+    public int      getBasePrice() {return basePrice;}  
+    public int      getRentalPrice () {return rentalPrice;}
+    public boolean  getRentalStatus() {return rentalStatus;}
+    public boolean  getTankStatus() {return tankStatus;}
+    public int      getRentalPeriod () {return rentalPeriod;}
+    public String   getCarType(){return carType;}
 
+    public String   RewriteRentalStatus () {return (rentalStatus) ? "Available" : "Vehicle already rented";}
+    public String   RewriteTankStatus () {return (tankSize> maxTank/2) ? "half full" : "not half full";}
 
-    public String getName () {
-        return name;
-        
-        
-    }
-    public float getTankSize () {
-        return tankSize;
-        
-    }
-    public String getLicensePlate () {
-        return licensePlate;
-        
-    }
-    public String getmanufacturer () {
-        return manufacturer;
-    }
-    public int getMileage () {
-        return mileage;
-    }
-    public float getConsumption () {
-        return consumption;
-        
-    }
-    public float getMaxTank () {
-        return maxTank;
-    }
-    public int getBasePrice() {
-
-        return basePrice ;
-        
-    }  
-    public int getRentalPrice () {
-        return rentalPrice;
-    }
-    public boolean getRentalStatus() {
-        return rentalStatus;
-    }
-    public boolean getTankStatus() {
-        return tankStatus;
-    }
-    public int getRentalPeriod () {
-        return rentalPeriod;
-    }
-    public String getCarType(){
-        return carType;
-    }
-
-    public String RewriteRentalStatus () {
-        return (rentalStatus) ? "Verfuegbar" : "nicht_Verfuegbar";
-    }
-    public String RewriteTankStatus () {
-        return (tankSize> maxTank/2) ? "Halbvoll" : "nicht_Halbvoll";
-    }
-
-     
 //Überschreibt die to string methode
     @Override
     public String toString() {
-        return String.format("Name: %s\r\nMileage: %d km\r\nRentalStatus: %s\r\nTanksstatus: %s\r\nTankSize: %f Liter\r\nLicensePlate: %s\r\nManufacturer: %s\r\nConsumption: %f l/100km\r\nMaxTank: %f Liter \r\nBasePrice: %d Euro/Tag\r\nRentalPrice: %d Euro\r\nRentalPeriod: %d Tage\r\nCarType: %s\r\n", 
+        return String.format("Name: %s\r\nMileage: %d km\r\nRentalState: %s\r\nTankState: %s\r\nTankSize: %f Liters\r\nLicensePlate: %s\r\nManufacturer: %s\r\nConsumption: %f l/100km\r\nMaxTank: %f Liters \r\nBasePrice: %d Euro/Day\r\nRentalPrice: %d Euro\r\nRentalPeriod: %d Days\r\nCarType: %s\r\n", 
                 name, mileage, RewriteRentalStatus (), RewriteTankStatus(), tankSize, licensePlate, manufacturer, consumption, maxTank, basePrice, rentalPrice, rentalPeriod, carType);
     }
     

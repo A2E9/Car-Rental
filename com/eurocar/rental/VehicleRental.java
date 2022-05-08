@@ -23,7 +23,7 @@ public class VehicleRental {
 
         //Entry Point
         while(loop){
-            System.out.print("[1]Alle-Fahrzeuge [2]Finden [3]Hinzufuegen [4]Beenden |->|: ");     
+            System.out.print("[1]List Vehicles [2]Find Vehicle [3]Add Vehicle [4]Exit |->|: ");     
             char c = reader.next().charAt(0); //Change to String cz Uppercase
             System.out.println();
             switch (c) {
@@ -51,9 +51,8 @@ public class VehicleRental {
     public static void FindVehicle() throws IOException{
 
         Scanner scanner = new Scanner(System.in); //Cannot close Scanner cz of switch Scanner
-        Map<Character,Runnable> commands = new HashMap<>();
         boolean loop = true;
-        System.out.print("Fahrzeug Name: ");
+        System.out.print("Vehicle name: ");
         
         String vehicleName = scanner.nextLine();
 
@@ -77,7 +76,7 @@ public class VehicleRental {
         while(loop){
             System.out.print("[1]Change_Data [2]Use_vehicle [3]Back -> ");
 
-             char cmd = scanner.next().charAt(0);
+            char cmd = scanner.next().charAt(0);
             System.out.println();
             switch (cmd) {
                 case '1':
@@ -90,25 +89,23 @@ public class VehicleRental {
                 loop = false;
                     break;
                 default:
-                    System.out.println("option nicht verfuegbar.");
+                    System.out.println("option not available.");
                     break;
-        }
-        if(!itemFound){      //If vehicle not found
-            while(restartLoop){
-            //System.out.print("\033[H\033[2J"); // Clear Console
-            System.out.print("Fahrzeug nicht gefunden. Nochmal versuchen? [j/n]: ");
-            char tryAgain = scanner.next().charAt(0);
-            if(tryAgain == 'j'){
-                FindVehicle();
-                restartLoop = false;
             }
-            else if(tryAgain == 'n')
-                restartLoop = false;
-            }           
-        }  
-
+            if(!itemFound){      //If vehicle not found
+                while(restartLoop){
+                System.out.print("Vehicle not found. Try again? [y/n]: ");
+                char tryAgain = scanner.next().charAt(0);
+                if(tryAgain == 'y'){
+                    FindVehicle();
+                    restartLoop = false;
+                }
+                else if(tryAgain == 'n')
+                    restartLoop = false;
+                }           
+            }  
         }
-
+        //scanner.close();
     }
     //Einzele Objekte des Fahrzeugs umschreiben
     public static void OverrideVehicleData(short index)  { 
@@ -133,45 +130,17 @@ public class VehicleRental {
 
         commands.put('9', () -> System.out.println(""));
 
-
-
         commands.get(cmd).run();
-        
 
-        //InitalizeAllVehicles();
-
-        //System.out.print("\033[H\033[2J");
         System.out.flush();
-
-
-    /*(Not implenemted Write to file new Vehicle data)
-        Path path = Paths.get("src\\com\\eurocar\\rental\\Vehicle_Database.bin");
-        Charset charset = StandardCharsets.UTF_8;
-        String content = new String(Files.readAllBytes(path), charset);
-        content = content.replaceAll(productsList.get(index).getName(), name);
-        Files.write(path, content.getBytes(charset));
-
-        FileWriter fileWriter = new FileWriter("src\\com\\eurocar\\rental\\Vehicle_Database.bin", true);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.write("ee", 0, 2);
-
-        while(input.hasNextLine()){
-            
-            if(str.indexOf(searchName) != -1){
-                str.indexOf(searchName);
-                System.out.println("succ");
-                range  = input.nextInt();
-                System.out.println(range);
-            }
-        }
-    */
+        //scanner.close();
     }
     //Benutzung vom Fahrzeug 
     public static void UsageOfVehicle(int vehIndex){
         //Tanken 
         Map<Character,Runnable> commands = new HashMap<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("[1]Fahren [2]Tanken [3]Rent_Vehicle [4]Back |->|: ");
+        System.out.print("[1]Drive [2]Refuel [3]Rent Vehicle [4]Back |->|: ");
         char cmd = scanner.next().charAt(0);
 
 
@@ -182,12 +151,11 @@ public class VehicleRental {
         commands.put('4', () -> System.out.println(""));
 
         commands.get(cmd).run();
-
+        //scanner.close();
     }
     //Fahrzeug erstellen -> Datei
     public static void CreateVehicle(){
         Scanner scanner = new Scanner(System.in);
-
 
         System.out.print("Name: "); //Excpetion only 1 name
         String name = scanner.nextLine();
@@ -226,24 +194,23 @@ public class VehicleRental {
         System.out.print("CarType: "); //Excpetion only 1 name
         String carType = scanner.next();
 
-        //scanner.close(); //Cannot cloase bz switch
         Vehicle vehicle1 = new Vehicle(name, mileage, availability,tankSize, licensePlate, manufacturer, consumption, maxTank, basePrice, carType );
         vehicle1.WriteToFile();
         InitalizeAllVehicles();
-      
+        //scanner.close();
     }
     //Alle Fahrzeuge in die ArrayList hinzufügen
     public static void InitalizeAllVehicles() {
         try {
 
-            Scanner input = new Scanner(new File("src\\com\\eurocar\\rental\\Vehicle_Database.bin"));
+            Scanner input = new Scanner(new File("com\\eurocar\\rental\\Vehicle_Database.bin"));
 
             while(input.hasNext()) {  
                
                 String name = input.next();
                 int mileage = input.nextInt();
                 boolean availability = input.nextBoolean();
-                boolean tankStatus = input.nextBoolean();
+                boolean aaa = input.nextBoolean();
                 float tankSize = Float.valueOf(input.next().substring(0));
                 String licensePlate = input.next();
                 String manufacturer = input.next();
